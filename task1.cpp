@@ -5,7 +5,7 @@
 using namespace std;
 
 class Calculator {
-public:
+protected:
     double num1;
     double num2;
     double res;
@@ -15,6 +15,7 @@ public:
     double div_1_2;
     double div_2_1;
 
+public:
     void add()
     {
         res = (double)num1 + (double)num2;
@@ -55,39 +56,28 @@ public:
         std::cout << num2 << " / " << num1 << " = " << (double)div_2_1 << std::endl;
     };
 
-    void set_num1()
+    bool set_num1(double num1)
     {
-        do
-        {
-            std::cout << "Введите num1: ";
-            std::cin >> num1;
-            std::cout << std::endl;
-
             if (num1 != 0) {
                 this->num1 = num1;
+                return 1;
             }
             else if (num1 == 0) {
                 std::cout << "Неправильный ввод!" << std::endl;
+                return 0;
             }
-        } while (num1 == 0);
-
     };
 
-    void set_num2()
-    {    
-        do
-        {
-            std::cout << "Введите num2: ";
-            std::cin >> num2;
-            std::cout << std::endl;
-
+    bool set_num2(double num2)
+    {       
             if (num2 != 0) {
                 this->num2 = num2;
+                return 1;
             }
             else if (num2 == 0) {
                 std::cout << "Неправильный ввод!" << std::endl;
+                return 0;
             }
-        } while (num2 == 0);
     };
 };
 int main()
@@ -98,9 +88,23 @@ int main()
     int i;
     double num1;
     double num2;
+
     do {
-        object.set_num1();
-        object.set_num2();
+        do
+        {
+            std::cout << "Введите num1: ";
+            std::cin >> num1;
+            std::cout << std::endl;
+            object.set_num1(num1);
+        } while (num1 == 0);
+
+        do
+        {
+            std::cout << "Введите num2: ";
+            std::cin >> num2;
+            std::cout << std::endl;
+            object.set_num2(num2);
+        } while (num2 == 0);
 
         object.add();
         object.multiply();
